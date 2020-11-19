@@ -1,0 +1,28 @@
+.container-buttons{
+    margin: 10px 8px 10px auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#delete-pokemon{
+    border: 3px solid #dc3545;
+    border-radius: 50%;
+    color: #dc3545;
+    margin-bottom: 12px;
+}
+
+#delete-pokemon:hover{
+    background: #dc3545;
+    border: 3px solid #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+img.img-pokemon{
+    margin-top: -12px;
+    border-top: 2px solid #696666;
+}
+
+i{
+    padding-top: 2px;
+}

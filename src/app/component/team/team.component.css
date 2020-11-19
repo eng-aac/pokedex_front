@@ -1,0 +1,202 @@
+h4{
+    padding-bottom: 25px;
+}
+
+.row{
+    display: flex;
+    padding: 5vh;
+    margin-bottom: 5vh;
+}
+
+.column{
+    width: 50vw;
+    margin: 5vh;
+}
+
+.table-team-player{
+    text-align: center;
+    padding: 0;
+}
+
+.table-team-player thead{
+    color: white;
+    background: black;
+    padding: 0;
+}
+
+.table-team-player thead tr th{
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+.table-team-player tbody{
+    color: black;
+    background: #E9E9E9;
+    padding: 0;
+}
+
+.table-team-player tbody tr th{
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.container-buttons{
+    display: flex;
+    height: 100%;
+    padding: 8px;
+    margin-left: 10px;
+    align-content: center;
+    justify-content: center;
+}
+
+.container-buttons-add{
+    display: flex;
+    height: 100%;
+    padding: 8px;
+    margin-left: 10px;
+    align-content: center;
+    justify-content: flex-start;
+    margin-left: 27px;
+    padding-left: 2px;
+}
+
+#delete-team{
+    border: 3px solid #dc3545;
+    color: #dc3545;
+    border-radius: 8px;
+}
+
+#delete-team:hover{
+    background: #dc3545;
+    border: 3px solid #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+#edit-team{
+    border: 3px solid #ffc107;
+    color: #ffc107;
+    margin-right: 10px;   
+    border-radius: 8px;
+}
+
+#edit-team:hover{
+    background: #ffc107;
+    border: 3px solid #ffc107;
+    color: white;
+    cursor: pointer;
+}
+
+#add-element, #submit-team{
+    border: 3px solid #28a745;
+    color: #28a745;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+}
+
+#add-element:hover, #submit-team:hover{
+    background: #28a745;
+    border: 3px solid #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+#clean-team{
+    border: 3px solid #dc3545;
+    color: #dc3545;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+}
+
+#clean-team:hover{
+    background: #dc3545;
+    border: 3px solid #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+i{
+    padding-top: 2px;
+}
+
+.modal{
+    align-content: center;
+    top: 10vh;
+    left: 20vh;
+    display: none;
+}
+
+.modal__content{
+    display: block;
+    height: 67.5vh;
+    background: E9E9E9;
+}
+
+.inputs label{
+    display: block;
+    width: 100%;
+}
+
+.inputs input{
+   width: 100%;
+}
+
+
+.modal__content h3{
+    margin-top: 80px;
+}
+
+#label-name{
+    margin-top: 0;
+}
+
+.modal__form{
+    background: white;
+    border-radius: 5px;
+    border: 2px solid darkslateblue;
+    padding: 5vh;
+}
+
+.input-player, .input-team{
+    border-radius: 5px;
+    background: white;
+    border: 3px solid darkslateblue;
+}
+
+.container-buttons-form{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    height: 35px; 
+}
+
+.modal-form-buttons-add{
+    margin-right: 20px;
+}
+
+.modal__button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #dc3545;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #dc3545;
+    font-size: 2.5em;
+    text-align: center;
+    border-radius: 50%;
+    font-family: sans-serif; 
+}
+
+.modal__button:hover{
+    cursor: pointer;
+    background: #dc3545;
+    color: white;
+}
+
+.modal--open{
+    display: block;
+}
+

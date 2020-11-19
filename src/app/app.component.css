@@ -1,0 +1,68 @@
+.body{
+    font-family: 'Prompt', sans-serif;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    img.logo{
+        width: 35px;
+        height: 21px;
+    }
+
+    h1{
+        margin-left: 10px;
+        font-size: medium;
+    }
+
+    ul{
+        padding-left: 8vw;
+        font-size: small;
+    }
+
+    .nav-link{
+        padding-right: 5px;
+    }
+
+    nav{
+        width: 80%;
+        justify-content: flex-start;    
+    }
+
+    footer p span{
+        display: contents;
+    }
+
+    footer p{
+        font-size: small;
+        width: 80%;
+        white-space: pre-line;
+        text-align: center;
+    }
+    
+}
+

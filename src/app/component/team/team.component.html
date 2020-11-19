@@ -1,1 +1,76 @@
-<p>team works!</p>
+<div class="container">
+    <h3>Team´s</h3>
+
+    <div class="row">
+    
+        <div class="column">
+            <h4>List of Team´s</h4>
+            
+            <table class="table-team-player container">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Player</th>
+                    <th>Level</th>
+                    <th>Pokemon Holder</th>
+                    <th>Pokemon Substitute</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                        <td>The best</td>
+                        <td>Aldo</td>
+                        <td>junior</td>
+                        <td>charmander</td>
+                        <td>pikachu</td>
+                        <td>
+                        <div class="container-buttons">
+                            <button id="edit-team">
+                            <i class="fas fa-edit"></i>
+                            </button>
+                            <button id="delete-team">
+                            <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="column">
+            <h4>Add or Edit</h4>
+
+            <div class="container__form">
+                <form class="modal__form">
+
+                <div class="inputs">
+                    <label for="name" id="label-name">Name</label>
+                    <input type="text" class="input-team" id="" placeholder="Enter the team´s player">
+
+                    <label for="">Player</label>
+                    <input type="text" class="input-team" id="" placeholder="Enter the team´s player">
+
+                    <label form="">Level</label>
+                    <input type="text" class="input-team" id="" placeholder="Enter the team´s nickname">
+        
+                    <label form="">Pokemon Holder</label>
+                    <input type="text" class="input-team" id="" placeholder="Enter the team´s pokemon">
+
+                    <label form="">Pokemon Substitute</label>
+                    <input type="text" class="input-team" id="" placeholder="Enter the team´s pokemon">
+        
+                </div>
+                
+                <div class="container-buttons-form">
+                    <button type="submit" class="modal-form-buttons-add" id="submit-team">Submit</button>
+                    <button type="reset" class="modal-form-buttons-reset" id="clean-team">Reset</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

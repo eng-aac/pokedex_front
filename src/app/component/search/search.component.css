@@ -1,0 +1,99 @@
+label{
+    display: flex;
+    justify-content: center;
+    height: auto;
+    align-self: center;
+    padding: 5px;
+    margin-top: 25px;
+    border-radius: 5px;
+}
+
+.input-component {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.inputs{
+    display: block;
+}
+
+.container-buttons{
+    display: flex;
+    justify-content: center;
+}
+
+.input-pokemon{
+    display: flex;
+    justify-content: center;
+}
+
+.button, .input-pokemon-name{
+    padding: 5px;
+    margin-top: 25px;
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+}
+
+.input-pokemon-name{
+    width: 15em;
+    font-size: 1.2em;
+    border: 3px solid darkslateblue;
+}
+
+.button{
+    width: 10em;
+}
+
+#get-pokemons{
+    border: 3px solid #28a745;
+    color: #28a745;
+}
+
+#get-pokemons:hover{
+    background: #28a745;
+    border: 3px solid #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+#clean-pokemons{
+    border: 3px solid #ffc107;
+    color: #ffc107;
+    margin-left: 2em;
+}
+
+#clean-pokemons:hover{
+    background: #ffc107;
+    border: 3px solid #ffc107;
+    color: white;
+    cursor: pointer;
+}
+
+#clean-pokemons:disabled{
+    background: white;
+    border: 3px solid #ffc107;
+    color: #6c757d;
+    cursor: auto;
+}
+
+#back-pokemons{
+    border: 3px solid #dc3545;
+    color: #dc3545;
+    margin-left: 2em;
+}
+
+#back-pokemons:hover{
+    background: #dc3545;
+    border: 3px solid #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+#back-pokemons:disabled{
+    background: white;
+    border: 3px solid #dc3545;
+    color: #6c757d;
+    cursor: auto;
+}
+
