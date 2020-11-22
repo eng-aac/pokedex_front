@@ -57,6 +57,13 @@ label{
     cursor: pointer;
 }
 
+#get-pokemons:disabled{
+    background: white;
+    border: 3px solid #28a745;
+    color: #6c757d;
+    cursor: auto;
+}
+
 #clean-pokemons{
     border: 3px solid #ffc107;
     color: #ffc107;
@@ -97,3 +104,21 @@ label{
     cursor: auto;
 }
 
+#add-pokemon{
+    border: 3px solid #28a745;
+    color: #28a745; 
+    border-radius: 8px;
+}
+
+#add-pokemon:hover{
+    background: #28a745;
+    border: 3px solid #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+label{
+    display: flex;
+    justify-content: center;
+    background: #fff3cd;
+}

@@ -3,8 +3,8 @@
 
     <div class="row">
     
-        <div class="column">
-            <h4>List of Team´s</h4>
+        <div class="column container">
+            <h4 clas="title">List of Team´s</h4>
             
             <table class="table-team-player container">
                 <thead>
@@ -18,57 +18,96 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let team of teams">
                     <tr>
-                        <th>1</th>
-                        <td>The best</td>
-                        <td>Aldo</td>
-                        <td>junior</td>
-                        <td>charmander</td>
-                        <td>pikachu</td>
+                        <th> {{ team.id }} </th>
+                        <td> {{ team.name_team }} </td>
+                        <td> {{ team.nickname_player }} </td>
+                        <td> {{ team.level }} </td>
+                        <td> 
+                            {{ team.pokemon_holder }} 
+
+                            <button id="view-pokemon-h" (click)="viewPokemon(team.pokemon_holder)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                        <td> 
+                            {{ team.pokemon_substitute }} 
+
+                            <button id="view-pokemon-s" (click)="viewPokemon(team.pokemon_substitute)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
                         <td>
                         <div class="container-buttons">
-                            <button id="edit-team">
-                            <i class="fas fa-edit"></i>
+                            <button id="edit-team" (click)="viewTeam(team)">
+                                <i class="fas fa-edit"></i>
                             </button>
-                            <button id="delete-team">
-                            <i class="fas fa-trash-alt"></i>
+                            <button id="delete-team" (click)="deleteTeam(team)">
+                                <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="container-card" id="container-card" *ngIf="isViewPokemon">
+                <div class="card container" id="" [ngStyle]="{'background': background_colors[pokemon.type]}">
+                    <div class="card-body">
+                        <div class="img-container">
+                            <img [src]="pokemon.sampleImage" alt="image-profile-pokemon" class="img-pokemon">
+                        </div>
+                        <h5 class="order-pokemon">Id: {{ pokemon.id_pokemon }}</h5>
+                        <h4>Name: {{ pokemon.name }}</h4>
+                        <p>Base Experience: {{ pokemon.base_experience }}</p>
+                        <p class="text-type">Type: {{ pokemon.type }}</p>
+
+                        <div class="container-buttons">
+                            <button id="cancel-pokemon" (click)="cancelPokemon()">
+                                Come Back
+                            </button>
+                        </div>
+                    </div>      
+                </div>
+            </div> 
         </div>
 
-        <div class="column">
-            <h4>Add or Edit</h4>
+        <div class="column container">
+            <h4 clas="title"> {{ titleForm }} </h4>
 
             <div class="container__form">
-                <form class="modal__form">
+                <form class="modal__form" [formGroup]="formsTeams">
+                    <div class="inputs">
+                        <label for="name_team" id="label-name">Name</label>
+                        <input type="text" class="input-team" id="name_team" placeholder="Enter the team´s player" formControlName="name_team">
 
-                <div class="inputs">
-                    <label for="name" id="label-name">Name</label>
-                    <input type="text" class="input-team" id="" placeholder="Enter the team´s player">
+                        <label for="nickname_player">Player</label>
+                        <input type="text" class="input-team" id="nickname_player" placeholder="Enter the team´s player" formControlName="nickname_player">
 
-                    <label for="">Player</label>
-                    <input type="text" class="input-team" id="" placeholder="Enter the team´s player">
+                        <label form="level">Level</label>
+                        <input type="text" class="input-team" id="level" placeholder="Enter the team´s level" formControlName="level">
 
-                    <label form="">Level</label>
-                    <input type="text" class="input-team" id="" placeholder="Enter the team´s nickname">
-        
-                    <label form="">Pokemon Holder</label>
-                    <input type="text" class="input-team" id="" placeholder="Enter the team´s pokemon">
+                        <label for="pokemon_holder">Pokemon Holder</label>
+                        <select class="form-control" class="input-team" id="pokemon_holder" formControlName="pokemon_holder">
+                                <option [value]="null" disabled selected>Select your holder Pokemon...</option>
+                                <option *ngFor="let pokemon of pokemons" [value]="pokemon.id_pokemon"> {{ pokemon.name }} </option>
+                        </select>
 
-                    <label form="">Pokemon Substitute</label>
-                    <input type="text" class="input-team" id="" placeholder="Enter the team´s pokemon">
-        
-                </div>
-                
-                <div class="container-buttons-form">
-                    <button type="submit" class="modal-form-buttons-add" id="submit-team">Submit</button>
-                    <button type="reset" class="modal-form-buttons-reset" id="clean-team">Reset</button>
-                </div>
+                        <label for="pokemon_substitute">Pokemon Substitute</label>
+                        <select class="form-control" class="input-team" id="pokemon_substitute" formControlName="pokemon_substitute">
+                                <option [value]="null" disabled selected>Select your holder Pokemon...</option>
+                                <option *ngFor="let pokemon of pokemons" [value]="pokemon.id_pokemon"> {{ pokemon.name }} </option>
+                        </select>
+                    </div>
+                    
+                    <div class="container-buttons-form">
+                        <button type="submit" *ngIf="!isEdit" (click)="postTeam()" class="modal-form-buttons-add" id="submit-team">Submit</button>
+                        <button type="submit" *ngIf="isEdit" (click)="putTeam()" class="modal-form-buttons-add" id="update-team">Update</button>
+                        
+                        <button type="reset" *ngIf="!isEdit" (click)="cleanTeam()" class="modal-form-buttons-reset" id="clean-team">Reset</button>
+                        <button type="reset" *ngIf="isEdit" (click)="cancelTeam()" class="modal-form-buttons-reset" id="cancel-team">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>

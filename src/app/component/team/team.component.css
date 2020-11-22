@@ -1,4 +1,4 @@
-h4{
+h4.title{
     padding-bottom: 25px;
 }
 
@@ -10,12 +10,13 @@ h4{
 
 .column{
     width: 50vw;
-    margin: 5vh;
+    margin: 3vh 0 3vh 3.5vw;
 }
 
 .table-team-player{
     text-align: center;
     padding: 0;
+    width: 50%;
 }
 
 .table-team-player thead{
@@ -45,7 +46,6 @@ h4{
     display: flex;
     height: 100%;
     padding: 8px;
-    margin-left: 10px;
     align-content: center;
     justify-content: center;
 }
@@ -74,14 +74,14 @@ h4{
     cursor: pointer;
 }
 
-#edit-team{
+#edit-team, #cancel-pokemon{
     border: 3px solid #ffc107;
     color: #ffc107;
     margin-right: 10px;   
     border-radius: 8px;
 }
 
-#edit-team:hover{
+#edit-team:hover, #cancel-pokemon:hover{
     background: #ffc107;
     border: 3px solid #ffc107;
     color: white;
@@ -102,16 +102,44 @@ h4{
     cursor: pointer;
 }
 
-#clean-team{
+#clean-team, #cancel-team{
     border: 3px solid #dc3545;
     color: #dc3545;
     padding: 5px 10px 5px 10px;
     border-radius: 8px;
 }
 
-#clean-team:hover{
+#clean-team:hover, #cancel-team:hover{
     background: #dc3545;
     border: 3px solid #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+#update-team{
+    border: 3px solid #ffc107;
+    color: #ffc107;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+}
+
+#update-team:hover{
+    background: #ffc107;
+    border: 3px solid #ffc107;
+    color: white;
+    cursor: pointer;
+}
+
+#view-pokemon-h, #view-pokemon-s{
+    border: 3px solid #28a745;
+    color: #28a745;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+#view-pokemon-h:hover, #view-pokemon-s:hover{
+    background: #28a745;
+    border: 3px solid #28a745;
     color: white;
     cursor: pointer;
 }
@@ -136,13 +164,17 @@ i{
 .inputs label{
     display: block;
     width: 100%;
+    margin-top: 3vh;
 }
 
 .inputs input{
    width: 100%;
 }
 
-
+.inputs select{
+    width: 104%;
+ }
+ 
 .modal__content h3{
     margin-top: 80px;
 }
@@ -156,6 +188,7 @@ i{
     border-radius: 5px;
     border: 2px solid darkslateblue;
     padding: 5vh;
+    width: 95%;
 }
 
 .input-player, .input-team{

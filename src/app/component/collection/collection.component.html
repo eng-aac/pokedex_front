@@ -1,21 +1,22 @@
 <h3>Collection</h3>
 
 <div class="container-card container" id="container-card">
-    <div class="card container" id="">
+    <div class="card container" id="" *ngFor="let pokemon of pokemons" [ngStyle]="{'background': background_colors[pokemon.type]}">
         <div class="card-body">
+            <div class="img-container">
+                <img [src]="pokemon.sampleImage" alt="image-profile-pokemon" class="img-pokemon">
+            </div>
+            <h5 class="order-pokemon">Id: {{ pokemon.id_pokemon }}</h5>
+            <h4>Name: {{ pokemon.name }}</h4>
+            <p>Base Experience: {{ pokemon.base_experience }}</p>
+            <p class="text-type">Type: {{ pokemon.type }}</p>
+
             <div class="container-buttons">
-                <button id="delete-pokemon">
-                <i class="fas fa-ban"></i>
+                <button id="remove-pokemon" (click)="deletePokemon(pokemon)">
+                    Remove
                 </button>
             </div>
-
-            <div class="img-container">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="image-profile-pokemon" class="img-pokemon">
-            </div>
-            <h5 class="order-pokemon">Order: </h5>
-            <h4>Name: </h4>
-            <p>Base Experience: </p>
-            <p class="text-type">Type: </p>
         </div>      
     </div>
-</div>  
+</div> 
+

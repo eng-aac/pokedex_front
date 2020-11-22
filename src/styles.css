@@ -350,6 +350,74 @@
     display: none;
   }
 
+.body{
+    font-family: 'Prompt', sans-serif;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    img.logo{
+        width: 35px;
+        height: 21px;
+    }
+
+    h1{
+        margin-left: 10px;
+        font-size: medium;
+    }
+
+    ul{
+        padding-left: 8vw;
+        font-size: small;
+    }
+
+    .nav-link{
+        padding-right: 5px;
+    }
+
+    nav{
+        width: 80%;
+        justify-content: flex-start;    
+    }
+
+    footer p span{
+        display: contents;
+    }
+
+    footer p{
+        font-size: small;
+        width: 80%;
+        white-space: pre-line;
+        text-align: center;
+    }
+    
+}
+
 
 h3{
   margin-top: 16vh;
@@ -371,11 +439,12 @@ h3{
   border-radius: 20px;
   margin: 20px;
   box-shadow: 10px 5px 5px #A4A4A4;
+  padding: 10px;
 }
 
 .card-body{
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .img-container{
@@ -403,35 +472,9 @@ img.img-pokemon{
   background: #DBCECE;
 }
 
-.hide{
-  visibility: hidden;
-  display: flex;
-  justify-content: center;
-}
-
-.show{
-  visibility: visible;
-  background: #dc3545;
-  color: white;
-}
-
-.show-ok{
-  visibility: visible;
-  background: #28a745;
-  color: white;
-}
-
-p.text-experience{
+p.text-type{
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 2px solid #696666;
 }
 
-a.add-pokemon{
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #28a745;
-}

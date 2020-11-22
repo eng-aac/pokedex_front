@@ -1,17 +1,42 @@
+<h3>Get ready to fight...</h3>
+
 <div class="input-component container">
-    <h3>Get ready to fight...</h3>
     <div class="inputs">
         <div class="input-pokemon">
-            <input type="text" id="pokemon-name" class="input-pokemon-name" placeholder="Capture your Pokemon..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="pokemon-name" [(ngModel)]="pokemon_name" (keyUp.enter)="browseOne(pokemon_name)" class="input-pokemon-name" placeholder="Capture your Pokemon...">
         </div>
-        <label class="hide container" id="input-component-error">Error</label>
+        <label class="container" id="input-component-error" *ngIf="error">Status: {{ message }}</label>
     </div>
 </div>
 
 <div class="container-buttons container">
-        <input type="button" value="Choose You" class="button" id="get-pokemons">
-        <input type="button" value="Don't Catch" class="button" id="clean-pokemons">
-        <input type="button" value="Come Back" class="button" id="back-pokemons">
+        <button class="button" id="get-pokemons" [disabled]="!pokemon_name" (click)="browseOne(pokemon_name)">
+            Choose You
+        </button>
+        <button class="button" id="clean-pokemons" [disabled]="!pokemon_name" (click)="clean()">
+            Don't Catch
+        </button>
+        <button class="button" id="back-pokemons" [disabled]="!browsing" (click)="comeBack()">
+            Come Back
+        </button>
 </div>
 
-<div class="container-card container" id="container-card"></div>    
+<div class="container-card container" id="container-card">
+    <div class="card container" id="" *ngIf="browsing" [ngStyle]="{'background': background_colors[pokemon.type]}">
+        <div class="card-body">
+            <div class="img-container">
+                <img [src]="pokemon.sampleImage" alt="image-profile-pokemon" class="img-pokemon">
+            </div>
+            <h5 class="order-pokemon">Id: {{ pokemon.id_pokemon }}</h5>
+            <h4>Name: {{ pokemon.name }}</h4>
+            <p>Base Experience: {{ pokemon.base_experience }}</p>
+            <p class="text-type">Type: {{ pokemon.type }}</p>
+
+            <div class="container-buttons">
+                <button id="add-pokemon" (click)="postPokemon(pokemon)">
+                    Add to Collection
+                </button>
+            </div>
+        </div>      
+    </div>
+</div>     
