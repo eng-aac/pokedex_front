@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PokemonService } from './services/pokemon.service';
 import { TeamService } from './services/team.service';
+import { TeamPokemonService } from './services/team-pokemon.service';
 import { MessageService } from './services/message.service';
 
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { SearchComponent } from './component/search/search.component';
   providers: [
     PokemonService,
     TeamService,
+    TeamPokemonService,
     MessageService
   ],
   bootstrap: [AppComponent]

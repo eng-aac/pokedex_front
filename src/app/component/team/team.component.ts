@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { Pokemon } from 'src/app/models/pokemon';
@@ -8,8 +7,11 @@ import { Team } from 'src/app/models/team';
 
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { TeamService } from 'src/app/services/team.service';
+import { MessageService } from 'src/app/services/message.service';
 
 import Swal from 'sweetalert2';
+import { TeamPokemonService } from 'src/app/services/team-pokemon.service';
+import { TeamPokemon } from 'src/app/models/teamPokemon';
 
 @Component({
   selector: 'app-team',
@@ -20,11 +22,15 @@ export class TeamComponent implements OnInit {
 
   pokemons: Pokemon[] = [];
   teams: Team[] = [];
-  titleForm: string = 'Add your Pokemon';
+  teamPokemons: TeamPokemon[];
+  titleForm: string = 'Add your Team';
   isEdit: boolean = false;
   formsTeams:  FormGroup;
+  formsTeamPokemons: FormGroup;
   id: number;
   isViewPokemon: boolean = false;
+  isTeamsPokemons: boolean = false;
+  id_vtp: number = 0;
 
   pokemon: Pokemon = {
     id_pokemon: 0,
@@ -51,8 +57,9 @@ export class TeamComponent implements OnInit {
     normal: '#F5F5F5'
   }
 
-  constructor( private _service: PokemonService, private _serviceTeam: TeamService,  
-               private formBuilder: FormBuilder, private rutaActiva: ActivatedRoute ) { }
+  constructor( private _service: PokemonService, private _serviceTeam: TeamService, 
+               private _serviceTeamPokemons: TeamPokemonService, private _serviceMessage: MessageService, 
+               private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
     this._service.getAll().subscribe((data) => this.pokemons = data);
@@ -61,21 +68,22 @@ export class TeamComponent implements OnInit {
     this.formsTeams = this.formBuilder.group({
       name_team: ['', Validators.required],
       nickname_player: ['', Validators.required],
-      level: ['', Validators.required],
-      pokemon_holder: ['null', Validators.required],
-      pokemon_substitute: ['null', Validators.required],
-    })
+      level: ['', Validators.required]
+    });
+
+    this.formsTeamPokemons = this.formBuilder.group({
+      TeamId: [null, Validators.required],
+      PokemonId: [null, Validators.required]
+    });
   }
 
   viewTeam(team: Team){
-    this.titleForm = 'Edit your Pokemon';
+    this.titleForm = 'Edit your Team';
     this.isEdit = true;
     this.formsTeams.setValue({
       name_team: team.name_team,
       nickname_player: team.nickname_player,
-      level: team.level,
-      pokemon_holder: team.pokemon_holder,
-      pokemon_substitute: team.pokemon_substitute
+      level: team.level
     })
     
     this.id = team.id;
@@ -85,66 +93,77 @@ export class TeamComponent implements OnInit {
     this.isViewPokemon = true;
     this._service.getOne(id).subscribe(data => {
       this.pokemon = data;
-    })
+    });
+  }
+
+  viewPokemons(teamId: number){
+    this.id_vtp = teamId;
+    this.isTeamsPokemons = true;
+    this._serviceTeamPokemons.getAll(teamId).subscribe((data) => {
+      this.teamPokemons = data;
+      if(this.teamPokemons.length == 0){
+        this.isTeamsPokemons = false;
+      }
+    });
+    
   }
 
   postTeam(){
-    this._serviceTeam.post(this.formsTeams.value).subscribe(data => {
-     this.ngOnInit();
+    this._serviceTeam.post(this.formsTeams.value).subscribe((data) => {
+      this.ngOnInit();
+      this._serviceMessage.success('Created!', 'Team created, successfully.');
+    },(error) => {
+      this._serviceMessage.error('Error!', 'Could not create, your team.');
+      }
+    );
+  }
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Created!',
-        text: 'Team created, successfully.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    });
+  postTeamPokemons(){
+    this._serviceTeamPokemons.post(this.formsTeamPokemons.value).subscribe((data) => {
+      this.ngOnInit();
+      this._serviceMessage.success('Added!', 'The pokemon was added to your team, successfully.');
+    },(error) => {
+        this._serviceMessage.error('Error!', 'Pokemon could not be added, to your team.');
+      }
+    );
   }
 
   putTeam(){
-    this._serviceTeam.update(this.id, this.formsTeams.value).subscribe(data => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Modified!',
-          text: 'Team modified, successfully.',
-          showConfirmButton: false,
-          timer: 2000
-        })
-
+    this._serviceTeam.update(this.id, this.formsTeams.value).pipe(first()).subscribe((data) => {
+        this._serviceMessage.success('Modified!', 'Team modified, successfully.');
         this.cancelTeam();
-    },
-    
-    error => {
-      alert(error);
-    });
+    }, (error) => {
+        this._serviceMessage.error('Error!', 'Could not modify, your team.');
+      }
+    );
   }
 
   deleteTeam(team: Team): void{
-    Swal.fire({
-      title: 'Delete',
+     Swal.fire({
+      title: 'Delete!',
       text: `Are you sure to eliminate the team ${team.name_team} ?`,
       icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      showDenyButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: '#d33',
+      denyButtonColor: '#A4A4A4',
       confirmButtonText: 'Yes, delete!',
-      cancelButtonText: 'Cancel'
-    }).then(result => {
-      if (result.value) {
-        this._serviceTeam.delete(team.id).subscribe(data => {
+      denyButtonText: 'Cancel!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._serviceTeam.delete(team.id).subscribe((data) => {
           this.teams = this.teams.filter(c => c !== team);
-        });
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Removed!',
-          text: 'The requested team, has been removed.',
-          showConfirmButton: false,
-          timer: 2000
-        });
+          this._serviceMessage.success('Removed!', 'The requested team, has been removed.');
+        }, (error) =>  { 
+            this._serviceMessage.error('Error!', 'Could not delete, your team.');
+          }
+        );
+      } else if (result.isDenied){
+        this._serviceMessage.info('Cancel!', 'Your team´s removal, has canceled.');
       }
-    });
+    }).catch((error) => {
+      this._serviceMessage.error('Error!', 'An error occurred, please try again later.');
+    });                                 
   }
 
   cleanTeam(){
@@ -152,9 +171,13 @@ export class TeamComponent implements OnInit {
   }
 
   cancelTeam(){
-    this.titleForm = 'Add your Pokemon';
+    this.titleForm = 'Add your Team';
     this.isEdit = false;
     this.ngOnInit();
+  }
+
+  cancelTeamPokemons(){
+    this.formsTeamPokemons.reset();
   }
 
   cancelPokemon(){

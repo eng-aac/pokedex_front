@@ -1,11 +1,15 @@
-label{
+.container-message{
     display: flex;
     justify-content: center;
-    height: auto;
-    align-self: center;
+}
+
+label{
     padding: 5px;
-    margin-top: 25px;
+    margin-top: 4vh;
     border-radius: 5px;
+    width: 31%;
+    background: #fff3cd;
+    text-align: center;
 }
 
 .input-component {
@@ -20,23 +24,26 @@ label{
 .container-buttons{
     display: flex;
     justify-content: center;
+    height: 100%;
+    align-items: center;
+    margin-top: 5vh;
 }
 
 .input-pokemon{
     display: flex;
     justify-content: center;
+    margin-top: 10vh;
 }
 
 .button, .input-pokemon-name{
     padding: 5px;
-    margin-top: 25px;
     border-radius: 5px;
     background: white;
     text-align: center;
 }
 
 .input-pokemon-name{
-    width: 15em;
+    width: 16em;
     font-size: 1.2em;
     border: 3px solid darkslateblue;
 }
@@ -115,10 +122,4 @@ label{
     border: 3px solid #28a745;
     color: white;
     cursor: pointer;
-}
-
-label{
-    display: flex;
-    justify-content: center;
-    background: #fff3cd;
 }

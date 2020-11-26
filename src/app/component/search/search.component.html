@@ -1,15 +1,17 @@
 <h3>Get ready to fight...</h3>
 
-<div class="input-component container">
+<div class="input-component">
     <div class="inputs">
         <div class="input-pokemon">
             <input type="text" id="pokemon-name" [(ngModel)]="pokemon_name" (keyUp.enter)="browseOne(pokemon_name)" class="input-pokemon-name" placeholder="Capture your Pokemon...">
         </div>
-        <label class="container" id="input-component-error" *ngIf="error">Status: {{ message }}</label>
+        <div class="container-message">
+            <label id="input-component-error" *ngIf="error">Status: {{ message }}</label>
+        </div>
     </div>
 </div>
 
-<div class="container-buttons container">
+<div class="container-buttons">
         <button class="button" id="get-pokemons" [disabled]="!pokemon_name" (click)="browseOne(pokemon_name)">
             Choose You
         </button>
@@ -21,8 +23,8 @@
         </button>
 </div>
 
-<div class="container-card container" id="container-card">
-    <div class="card container" id="" *ngIf="browsing" [ngStyle]="{'background': background_colors[pokemon.type]}">
+<div class="container-card" id="container-card">
+    <div class="card" id="" *ngIf="browsing" [ngStyle]="{'background': background_colors[pokemon.type]}">
         <div class="card-body">
             <div class="img-container">
                 <img [src]="pokemon.sampleImage" alt="image-profile-pokemon" class="img-pokemon">

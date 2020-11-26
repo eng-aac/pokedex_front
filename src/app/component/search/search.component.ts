@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Pokemon } from 'src/app/models/pokemon';
+
+import { MessageService } from 'src/app/services/message.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-search',
@@ -40,7 +43,8 @@ export class SearchComponent implements OnInit {
     normal: '#F5F5F5'
   }
 
-  constructor( private _service: PokemonService ) { }
+  constructor( private router: Router, private _service: PokemonService, 
+               private _serviceMessage: MessageService ) { }
 
   ngOnInit(): void {
   }
@@ -54,18 +58,18 @@ export class SearchComponent implements OnInit {
     if(pokemon_name === '' || !pokemon_name || pokemon_name == null){
       this.browsing = false;
       setTimeout(() => {
-        this.message = 'This is the name or id, was invalid !!';
+        this.message = 'The name/id entered, is invalid !!';
       }, 200);
     } else {
       this._service.browse(pokemon_name).subscribe((data) => {
         this.pokemon = data;
         this.message = 'This is Correct !!';
         this.browsing = true;
-      }, (error) =>  { this.browsing = false;
+      }, (error) =>  {  this.browsing = false;
   
-                      setTimeout(() => {
-                        this.message = 'This is the process was invalid !!';
-                      }, 200);
+                        setTimeout(() => {
+                          this.message = 'This process, was invalid !!';
+                        }, 200);
                      }
       );   
     }        
@@ -83,19 +87,17 @@ export class SearchComponent implements OnInit {
   }
 
   postPokemon(pokemon: Pokemon){
-    this._service.post(pokemon).subscribe(data => {
+    this._service.post(pokemon).subscribe(() => {
       this.pokemon_name = '';
       this.error = false;
       this.browsing = false;
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Added!',
-        text: `Pokemon ${pokemon.name} added to Collection, successfully.`,
-        showConfirmButton: false,
-        timer: 2000
-      });
-    });
+      this.router.navigate(['collection']);
+      this._serviceMessage.success('Added!', `Pokemon ${pokemon.name} added to Collection, successfully.`);
+    }, (error) =>  { 
+        console.log('error')
+        this._serviceMessage.error('Error!', 'Could not add, your pokemon.');
+      }
+    );
   }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Pokemon } from 'src/app/models/pokemon';
+
+import { MessageService } from 'src/app/services/message.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 import Swal from 'sweetalert2';
@@ -32,7 +33,7 @@ export class CollectionComponent implements OnInit {
     normal: '#F5F5F5'
   }
 
-  constructor( private router: Router, private _service: PokemonService ) { }
+  constructor( private _service: PokemonService, private _serviceMessage: MessageService ) { }
 
   ngOnInit(): void {
     this._service.getAll().subscribe((data) => this.pokemons = data);
@@ -40,29 +41,30 @@ export class CollectionComponent implements OnInit {
 
   deletePokemon(pokemon: Pokemon): void{
     Swal.fire({
-      title: 'Delete',
+      title: 'Delete!',
       text: `Are you sure to eliminate the pokemon ${pokemon.name} ?`,
       icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      showDenyButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: '#d33',
+      denyButtonColor: '#A4A4A4',
       confirmButtonText: 'Yes, delete!',
-      cancelButtonText: 'Cancel'
-    }).then(result => {
-      if (result.value) {
-        this._service.delete(pokemon.id_pokemon).subscribe(data => {
+      denyButtonText: 'Cancel!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._service.delete(pokemon.id_pokemon).subscribe((data) => {
           this.pokemons = this.pokemons.filter(c => c !== pokemon);
-        });
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Removed!',
-          text: 'The requested pokemon, has been removed.',
-          showConfirmButton: false,
-          timer: 2000
-        });
+          this._serviceMessage.success('Removed!', 'The requested pokemon, has been removed.');
+        }, (error) =>  { 
+            this._serviceMessage.error('Error!', 'Could not delete, your pokemon.');
+          }
+        );
+      } else if (result.isDenied){
+        this._serviceMessage.info('Cancel!', 'Your pokemon´s removal, has canceled.');
       }
-    });
+    }).catch((error) => {
+      this._serviceMessage.error('Error!', 'An error occurred, please try again later.');
+    });                                    
   }
 
 }

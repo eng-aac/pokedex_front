@@ -31,7 +31,8 @@ export class PokemonService {
     return this.http.post<Pokemon>(`${this.baseUrl}/`, Pokemon, {headers: this.httpHeaders});
   }
 
-  delete(id_pokemon: number): Observable<Pokemon> {
-    return this.http.delete<Pokemon>(`${this.baseUrl}/${id_pokemon}`, {headers: this.httpHeaders});
+  delete(id_pokemon: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id_pokemon}`, {headers: this.httpHeaders});
   }
+  
 }

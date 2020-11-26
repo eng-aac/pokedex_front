@@ -1,7 +1,7 @@
 <h3>Collection</h3>
 
-<div class="container-card container" id="container-card">
-    <div class="card container" id="" *ngFor="let pokemon of pokemons" [ngStyle]="{'background': background_colors[pokemon.type]}">
+<div class="container-card" id="container-card">
+    <div class="card" id="" *ngFor="let pokemon of pokemons" [ngStyle]="{'background': background_colors[pokemon.type]}">
         <div class="card-body">
             <div class="img-container">
                 <img [src]="pokemon.sampleImage" alt="image-profile-pokemon" class="img-pokemon">

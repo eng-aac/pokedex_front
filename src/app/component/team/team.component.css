@@ -1,22 +1,24 @@
 h4.title{
-    padding-bottom: 25px;
+    margin-top: 8vh;
 }
 
 .row{
     display: flex;
-    padding: 5vh;
+    padding: 0 5vw 10vh 5vw;
     margin-bottom: 5vh;
+
 }
 
 .column{
     width: 50vw;
-    margin: 3vh 0 3vh 3.5vw;
+    margin: 0 0 3vh 3.5vw;
 }
 
 .table-team-player{
     text-align: center;
     padding: 0;
     width: 50%;
+    box-shadow: 10px 5px 5px #A4A4A4;
 }
 
 .table-team-player thead{
@@ -88,28 +90,28 @@ h4.title{
     cursor: pointer;
 }
 
-#add-element, #submit-team{
+#add-element, #submit-team, #submit-teamPokemons{
     border: 3px solid #28a745;
     color: #28a745;
     padding: 5px 10px 5px 10px;
     border-radius: 8px;
 }
 
-#add-element:hover, #submit-team:hover{
+#add-element:hover, #submit-team:hover, #submit-teamPokemons:hover{
     background: #28a745;
     border: 3px solid #28a745;
     color: white;
     cursor: pointer;
 }
 
-#clean-team, #cancel-team{
+#clean-team, #cancel-team, #cancel-teamPokemons{
     border: 3px solid #dc3545;
     color: #dc3545;
     padding: 5px 10px 5px 10px;
     border-radius: 8px;
 }
 
-#clean-team:hover, #cancel-team:hover{
+#clean-team:hover, #cancel-team:hover, #cancel-teamPokemons:hover{
     background: #dc3545;
     border: 3px solid #dc3545;
     color: white;
@@ -130,65 +132,105 @@ h4.title{
     cursor: pointer;
 }
 
-#view-pokemon-h, #view-pokemon-s{
+#view-pokemon-h, #view-pokemon-s, .viewAllPokemons{
     border: 3px solid #28a745;
     color: #28a745;
     border-radius: 8px;
     margin-left: 10px;
 }
 
-#view-pokemon-h:hover, #view-pokemon-s:hover{
+.viewAllPokemons{
+    margin-right: 10px;
+}
+
+#view-pokemon-h:hover, #view-pokemon-s:hover, .viewAllPokemons:hover{
     background: #28a745;
     border: 3px solid #28a745;
     color: white;
     cursor: pointer;
 }
 
+#submit-team:disabled, #submit-teamPokemons:disabled{
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+    background: white;
+    border: 3px solid #28a745;
+    color: #6c757d;
+    cursor: auto;
+}
+
+#update-team:disabled{
+    border: 3px solid #ffc107;
+    padding: 5px 10px 5px 10px;
+    background: white;
+    border-radius: 8px;
+    color: #6c757d;
+    cursor: auto;
+}
+
+.container-card{
+    height: 100%;
+    align-items: center;
+}
+
+.column-2{
+    margin-left: 8vw;
+}
+
 i{
     padding-top: 2px;
 }
 
-.modal{
-    align-content: center;
-    top: 10vh;
-    left: 20vh;
-    display: none;
+.container-pokemonsTeam{
+    display: flex;
+    margin-top: 2vh;
 }
 
-.modal__content{
-    display: block;
-    height: 67.5vh;
-    background: E9E9E9;
+.container-pokemonsTeam li{
+    list-style-type: none;
+    margin-left: 8.5px;
+    font-weight: bold;
+}
+
+.inputs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-33{
+    width: 31%;
+}
+
+.input-50{
+    width: 47.5%;
 }
 
 .inputs label{
     display: block;
     width: 100%;
-    margin-top: 3vh;
 }
 
 .inputs input{
-   width: 100%;
+    width: 98%;
 }
 
 .inputs select{
-    width: 104%;
- }
- 
-.modal__content h3{
-    margin-top: 80px;
+    width: 105%;
 }
 
 #label-name{
     margin-top: 0;
 }
 
-.modal__form{
+.forms_team{
     background: white;
     border-radius: 5px;
     border: 2px solid darkslateblue;
     padding: 5vh;
-    width: 95%;
+    width: 85%;
+    box-shadow: 10px 5px 5px #A4A4A4;
+    background: #E9E9E9;
 }
 
 .input-player, .input-team{
@@ -208,28 +250,9 @@ i{
     margin-right: 20px;
 }
 
-.modal__button{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #dc3545;
-    font-weight: bold;
-    width: 50px;
-    height: 50px;
-    border: 3px solid #dc3545;
-    font-size: 2.5em;
-    text-align: center;
-    border-radius: 50%;
-    font-family: sans-serif; 
-}
-
-.modal__button:hover{
-    cursor: pointer;
-    background: #dc3545;
-    color: white;
-}
-
-.modal--open{
+span{
+    font-style: italic;
     display: block;
+    margin-top: 10px;
 }
 

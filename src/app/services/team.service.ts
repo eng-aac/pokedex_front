@@ -31,8 +31,8 @@ export class TeamService {
     return this.http.put<Team>(`${this.baseUrl}/${id}`, Team, {headers: this.httpHeaders});
   }
 
-  delete(id: number): Observable<Team> {
-    return this.http.delete<Team>(`${this.baseUrl}/${id}`, {headers: this.httpHeaders});
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`, {headers: this.httpHeaders});
   }
   
 }

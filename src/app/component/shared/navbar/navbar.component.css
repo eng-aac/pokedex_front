@@ -50,9 +50,13 @@ ul{
     text-align: center;
 }
 
+.active a{
+    color: white;
+}
+
 .nav-link{
     font-weight: bold;
     text-decoration: none;
-    color: white;
+    color: #B3B3B3;
     padding-right: 40px;
 }
