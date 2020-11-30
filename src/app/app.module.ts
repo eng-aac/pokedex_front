@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { PokemonService } from './services/pokemon.service';
 import { TeamService } from './services/team.service';
 import { TeamPokemonService } from './services/team-pokemon.service';
 import { MessageService } from './services/message.service';
+import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/shared/navbar/navbar.component';
@@ -40,7 +41,13 @@ import { SearchComponent } from './component/search/search.component';
     PokemonService,
     TeamService,
     TeamPokemonService,
-    MessageService
+    MessageService,
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

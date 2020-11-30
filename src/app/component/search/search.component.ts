@@ -25,6 +25,8 @@ export class SearchComponent implements OnInit {
   browsing: boolean = false;
   error: boolean = false;
   message: string = '';
+  isPokemon: boolean = true;
+  messagePokemon: string = 'Click to add your Collection.'
 
   background_colors = {
     fire: '#FDDFDF',
@@ -50,6 +52,8 @@ export class SearchComponent implements OnInit {
   }
 
   browseOne(pokemon_name: any) {
+    this.isPokemon = true;
+    this.messagePokemon = 'Click to add your Collection.';
     this.error = true;
     this.message = 'Processing...';
 
@@ -65,12 +69,15 @@ export class SearchComponent implements OnInit {
         this.pokemon = data;
         this.message = 'This is Correct !!';
         this.browsing = true;
-      }, (error) =>  {  this.browsing = false;
+        this.getOnePokemon();
+      }, (err) =>   {  this.browsing = false;
   
                         setTimeout(() => {
-                          this.message = 'This process, was invalid !!';
+                          this.message = 'This process, was invalid !! ' + err;
                         }, 200);
-                     }
+
+                        throw err;
+                    }
       );   
     }        
   }
@@ -93,9 +100,22 @@ export class SearchComponent implements OnInit {
       this.browsing = false;
       this.router.navigate(['collection']);
       this._serviceMessage.success('Added!', `Pokemon ${pokemon.name} added to Collection, successfully.`);
-    }, (error) =>  { 
-        console.log('error')
-        this._serviceMessage.error('Error!', 'Could not add, your pokemon.');
+    }, (err) =>  { 
+        this._serviceMessage.error('Error!', 'Could not add, your pokemon. ' + err);
+        throw err;
+      }
+    );
+  }
+
+  getOnePokemon(){
+    this._service.getOne(this.pokemon.id_pokemon).subscribe((data) => {
+        if(data){
+          this.isPokemon = false;
+          this.messagePokemon = 'This Pokemon is already in your Collection.';
+        }
+    }, (err) =>  { 
+        this.isPokemon = true;
+        this.messagePokemon = 'Click to add your Collection.';
       }
     );
   }

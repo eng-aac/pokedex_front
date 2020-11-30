@@ -24,9 +24,15 @@
                         <td> {{ team.nickname_player }} </td>
                         <td> {{ team.level }} </td>
                         <td>
-                            <button class="viewAllPokemons" [id]="id_vtp" (click)="viewPokemons(team.id)">
-                                View
-                            </button>
+                            <div class="container-buttons">
+                                <button class="viewAllPokemons" [disabled]="(isCancelView && id_vtp == team.id && isTeamsPokemons) || (isCancelView && id_vtp == team.id && !isTeamsPokemons)" [id]="id_vtp" (click)="viewPokemons(team.id)">
+                                    View
+                                </button>
+                                <button id="notView" *ngIf="(id_vtp == team.id && isTeamsPokemons) || (id_vtp == team.id && !isTeamsPokemons)" (click)="notView()">
+                                    <i class="fas fa-eye-slash"></i>
+                                </button>
+                            </div>
+                            
                             <div class="container-pokemonsTeam" *ngIf="id_vtp == team.id && isTeamsPokemons">
                                 <div class="team_pokemon" *ngFor="let teamPokemon of teamPokemons">
                                     <li>
@@ -94,16 +100,19 @@
                     </div>
                     <div class="input-50">
                         <label for="PokemonId" class="label-select">Pokemon</label>
-                        <select class="form-control" class="input-team" id="PokemonId" formControlName="PokemonId">
+                        <select class="form-control" class="input-team" id="PokemonId" formControlName="PokemonId" (change)="viewPokemon($event.target.value)">
                                 <option [value]="null" disabled selected>Add your pokemon...</option>
-                                <option *ngFor="let pokemon of pokemons" [value]="pokemon.id_pokemon"> {{ pokemon.name }} </option>
+                                <option *ngFor="let pokemon of pokemons" [value]="pokemon.id_pokemon"> 
+                                    {{ pokemon.name }} 
+                                    
+                                </option>
                         </select>
                     </div> 
                 </div>
                 
                 <div class="container-buttons-form">
                     <button type="submit"  [disabled]="formsTeamPokemons.invalid" (click)="postTeamPokemons()" class="modal-form-buttons-add" id="submit-teamPokemons">Submit</button>
-                    <button type="reset" (click)="cancelTeamPokemons()" class="modal-form-buttons-reset" id="cancel-teamPokemons">Cancel</button>
+                    <button type="reset" (click)="cancelTeamPokemons()" class="modal-form-buttons-reset" id="cancel-teamPokemons">Reset</button>
                 </div>
             </form> 
         </div>

@@ -76,14 +76,14 @@ h4.title{
     cursor: pointer;
 }
 
-#edit-team, #cancel-pokemon{
+#edit-team, #cancel-pokemon, #notView{
     border: 3px solid #ffc107;
     color: #ffc107;
     margin-right: 10px;   
     border-radius: 8px;
 }
 
-#edit-team:hover, #cancel-pokemon:hover{
+#edit-team:hover, #cancel-pokemon:hover, #notView:hover{
     background: #ffc107;
     border: 3px solid #ffc107;
     color: white;
@@ -159,6 +159,14 @@ h4.title{
     cursor: auto;
 }
 
+.viewAllPokemons:disabled{
+    border-radius: 8px;
+    background: white;
+    border: 3px solid #28a745;
+    color: #6c757d;
+    cursor: auto;
+}
+
 #update-team:disabled{
     border: 3px solid #ffc107;
     padding: 5px 10px 5px 10px;
@@ -183,13 +191,18 @@ i{
 
 .container-pokemonsTeam{
     display: flex;
+    justify-content: center;
     margin-top: 2vh;
 }
 
-.container-pokemonsTeam li{
+.team_pokemon li{
     list-style-type: none;
-    margin-left: 8.5px;
+    margin-left: 2px;
     font-weight: bold;
+}
+
+.team_pokemon button:last-child{
+    margin-right: 10px;
 }
 
 .inputs{

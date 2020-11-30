@@ -4,12 +4,21 @@
 }
 
 label{
+    background: #fff3cd;
+    text-align: center;
     padding: 5px;
+    text-align: center;
+}
+
+label#input-component-error{
     margin-top: 4vh;
     border-radius: 5px;
     width: 31%;
-    background: #fff3cd;
-    text-align: center;
+    word-wrap: break-word;
+}
+
+label.message{
+    border-radius: 10px;
 }
 
 .input-component {
@@ -115,6 +124,7 @@ label{
     border: 3px solid #28a745;
     color: #28a745; 
     border-radius: 8px;
+    margin-bottom: 5vh;
 }
 
 #add-pokemon:hover{
@@ -123,3 +133,11 @@ label{
     color: white;
     cursor: pointer;
 }
+
+#add-pokemon:disabled{
+    background: white;
+    border: 3px solid #28a745;
+    color: #6c757d;
+    cursor: auto;
+}
+

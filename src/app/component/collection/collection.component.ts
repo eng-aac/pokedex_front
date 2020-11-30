@@ -36,7 +36,12 @@ export class CollectionComponent implements OnInit {
   constructor( private _service: PokemonService, private _serviceMessage: MessageService ) { }
 
   ngOnInit(): void {
-    this._service.getAll().subscribe((data) => this.pokemons = data);
+    this._service.getAll().subscribe((data) => { 
+      this.pokemons = data;
+    }, (err) => {
+      this._serviceMessage.error('Error!', 'Could not find, your pokemon´s. ' + err);
+      throw err;
+    });
   }
 
   deletePokemon(pokemon: Pokemon): void{
@@ -55,15 +60,17 @@ export class CollectionComponent implements OnInit {
         this._service.delete(pokemon.id_pokemon).subscribe((data) => {
           this.pokemons = this.pokemons.filter(c => c !== pokemon);
           this._serviceMessage.success('Removed!', 'The requested pokemon, has been removed.');
-        }, (error) =>  { 
-            this._serviceMessage.error('Error!', 'Could not delete, your pokemon.');
+        }, (err) =>  { 
+            this._serviceMessage.error('Error!', 'Could not delete, your pokemon. ' + err);
+            throw err;
           }
         );
       } else if (result.isDenied){
         this._serviceMessage.info('Cancel!', 'Your pokemon´s removal, has canceled.');
       }
-    }).catch((error) => {
-      this._serviceMessage.error('Error!', 'An error occurred, please try again later.');
+    }).catch((err) => {
+      this._serviceMessage.error('Error!', 'An error occurred, please try again later. ' + err);
+      throw err;
     });                                    
   }
 
