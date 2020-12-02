@@ -38,7 +38,6 @@ export class CollectionComponent implements OnInit {
   constructor( private _service: PokemonService, private _serviceMessage: MessageService ) { }
 
   ngOnInit(): void {
-    this._serviceMessage.info('Loading !!', 'Please, wait...');
     this._service.getAll().subscribe((data) => { 
       this.pokemons = data;
     }, (err) => {
@@ -62,8 +61,10 @@ export class CollectionComponent implements OnInit {
       if (result.isConfirmed) {
         this._service.delete(pokemon.id_pokemon).subscribe((data) => {
           this.pokemons = this.pokemons.filter(c => c !== pokemon);
+          this.cleanPokemon();
           this._serviceMessage.success('Removed!', 'The requested pokemon, has been removed.');
         }, (err) =>  { 
+            this.cleanPokemon();
             this._serviceMessage.error('Error!', 'Could not delete, your pokemon. ' + err);
             throw err;
           }
@@ -78,19 +79,25 @@ export class CollectionComponent implements OnInit {
   }
 
   browsePokemon(){
-    this._service.browsePokemon(this.pokemon_name).subscribe((data) => {
-      this.pokemons = data;
-      setTimeout(() => {
-        if(this.pokemons.length == 0){
-          this.cleanPokemon();
-          this._serviceMessage.error('Error!', 'Could not browse, your pokemon.');
-        }
-      }, 200);
-
-    }, (err) =>  { 
-      this._serviceMessage.error('Error!', 'Could not browse, your pokemon. ' + err);
-      throw err;
-    });
+    this.pokemon_name = this.pokemon_name.trim();
+    if(this.pokemon_name === '' || !this.pokemon_name || this.pokemon_name == null){
+      this.cleanPokemon();
+      this._serviceMessage.error('Error!', 'Could not browse, your pokemon.');
+    } else {
+      this._service.browsePokemon(this.pokemon_name).subscribe((data) => {
+        this.pokemons = data;
+        setTimeout(() => {
+          if(this.pokemons.length == 0){
+            this.cleanPokemon();
+            this._serviceMessage.error('Error!', 'Could not browse, your pokemon.');
+          }
+        }, 200);
+  
+      }, (err) =>  { 
+        this._serviceMessage.error('Error!', 'Could not browse, your pokemon. ' + err);
+        throw err;
+      });
+    }
   }
 
   cleanPokemon(){
