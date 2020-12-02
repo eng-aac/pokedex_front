@@ -56,10 +56,15 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ### And the third: the team component. In it you can create your team. See the team's in the database, modify them, delete them and add the pokemon's from your collection.
 
 
+&nbsp;
+
+> > ## Backend
+### First Repository.
+
 
 
 &nbsp;
-> > 
+
 
 > ## **powered by**
 

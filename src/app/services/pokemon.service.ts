@@ -27,12 +27,16 @@ export class PokemonService {
     return this.http.get<Pokemon>(`${this.baseUrl}/browse/${name}`, {headers: this.httpHeaders});
   }
 
+  browsePokemon(name: string): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>(`${this.baseUrl}/?name=${name}`);
+  }
+
   post(Pokemon: Pokemon): Observable<Pokemon> {
     return this.http.post<Pokemon>(`${this.baseUrl}/`, Pokemon, {headers: this.httpHeaders});
   }
 
   delete(id_pokemon: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id_pokemon}`, {headers: this.httpHeaders});
+    return this.http.delete(`${this.baseUrl}/${id_pokemon}`);
   }
   
 }

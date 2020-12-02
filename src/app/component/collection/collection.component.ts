@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 export class CollectionComponent implements OnInit {
 
   pokemons: Pokemon[] = [];
+  seeable: boolean = true;
+  pokemon_name: string;
 
   background_colors = {
     fire: '#FDDFDF',
@@ -36,6 +38,7 @@ export class CollectionComponent implements OnInit {
   constructor( private _service: PokemonService, private _serviceMessage: MessageService ) { }
 
   ngOnInit(): void {
+    this._serviceMessage.info('Loading !!', 'Please, wait...');
     this._service.getAll().subscribe((data) => { 
       this.pokemons = data;
     }, (err) => {
@@ -72,6 +75,27 @@ export class CollectionComponent implements OnInit {
       this._serviceMessage.error('Error!', 'An error occurred, please try again later. ' + err);
       throw err;
     });                                    
+  }
+
+  browsePokemon(){
+    this._service.browsePokemon(this.pokemon_name).subscribe((data) => {
+      this.pokemons = data;
+      setTimeout(() => {
+        if(this.pokemons.length == 0){
+          this.cleanPokemon();
+          this._serviceMessage.error('Error!', 'Could not browse, your pokemon.');
+        }
+      }, 200);
+
+    }, (err) =>  { 
+      this._serviceMessage.error('Error!', 'Could not browse, your pokemon. ' + err);
+      throw err;
+    });
+  }
+
+  cleanPokemon(){
+    this.pokemon_name = '';
+    this.ngOnInit();
   }
 
 }

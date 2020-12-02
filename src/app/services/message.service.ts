@@ -16,7 +16,7 @@ export class MessageService {
       title: title,
       text: text,
       showConfirmButton: false,
-      timer: 3000
+      timer: 4000
     })
   }
 
@@ -26,7 +26,7 @@ export class MessageService {
       title: title,
       text: text,
       showConfirmButton: false,
-      timer: 3000
+      timer: 4000
     })
   }
 
@@ -36,7 +36,7 @@ export class MessageService {
       title: title,
       text: text,
       showConfirmButton: false,
-      timer: 2000
+      timer: 4000
     })
   }
 

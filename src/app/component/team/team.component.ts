@@ -64,20 +64,26 @@ export class TeamComponent implements OnInit {
                private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
-    this._service.getAll().subscribe((data) => {
-      this.pokemons = data;
-    }, (err) => {
-      this._serviceMessage.error('Error!', 'Could not find, your pokemon´s. ' + err);
-      throw err;
-    });
 
-    this._serviceTeam.getAll().subscribe((data) => { 
-      this.teams = data 
-    }, (err) => {
-      this._serviceMessage.error('Error!', 'Could not find, your team´s. ' + err);
-      throw err;
-    });
+ 
+      this._service.getAll().subscribe((data) => {
+        this.pokemons = data;
+      }, (err) => {
+        this._serviceMessage.error('Error!', 'Could not find, your pokemon´s. ' + err);
+        throw err;
+      });
 
+
+    setTimeout(() => {
+      this._serviceTeam.getAll().subscribe((data) => { 
+        this.teams = data 
+      }, (err) => {
+        this._serviceMessage.error('Error!', 'Could not find, your team´s. ' + err);
+        throw err;
+      });  
+    }, 200);
+   
+    
     this.formsTeams = this.formBuilder.group({
       name_team: ['', Validators.required],
       nickname_player: ['', Validators.required],
@@ -142,10 +148,7 @@ export class TeamComponent implements OnInit {
   postTeamPokemons(){
     this._serviceTeamPokemons.post(this.formsTeamPokemons.value).subscribe((data) => {
       this.ngOnInit();
-      this.id_vtp = 0;
-      this.isViewPokemon = false;
-      this.isTeamsPokemons = false;
-      this.isCancelView = false;
+      this.notView();
       this._serviceMessage.success('Added!', 'The pokemon was added to your team, successfully.');
     },(err) => {
         this._serviceMessage.error('Error!', 'Pokemon could not be added, to your team. ' + err);
@@ -158,6 +161,7 @@ export class TeamComponent implements OnInit {
     this._serviceTeam.update(this.id, this.formsTeams.value).pipe(first()).subscribe((data) => {
         this._serviceMessage.success('Modified!', 'Team modified, successfully.');
         this.cancelTeam();
+        this.notView();
     }, (err) => {
         this._serviceMessage.error('Error!', 'Could not modify, your team. ' + err);
         throw err;
@@ -180,10 +184,7 @@ export class TeamComponent implements OnInit {
       if (result.isConfirmed) {
         this._serviceTeam.delete(team.id).subscribe((data) => {
           this.teams = this.teams.filter(c => c !== team);
-          this.id_vtp = 0;
-          this.isViewPokemon = false;
-          this.isTeamsPokemons = false;
-          this.isCancelView = false;
+          this.notView();
           this._serviceMessage.success('Removed!', 'The requested team, has been removed.');
         }, (err) =>  { 
             this._serviceMessage.error('Error!', 'Could not delete, your team. ' + err);
@@ -211,6 +212,7 @@ export class TeamComponent implements OnInit {
 
   cancelTeamPokemons(){
     this.formsTeamPokemons.reset();
+    this.cancelPokemon();
   }
 
   cancelPokemon(){

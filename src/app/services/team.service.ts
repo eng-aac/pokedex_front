@@ -32,7 +32,7 @@ export class TeamService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
   
 }

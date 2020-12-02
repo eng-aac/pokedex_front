@@ -20,6 +20,42 @@
     cursor: pointer;
 }
 
+.form-browse{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+#pokemon-name{
+    width: 16em;
+    font-size: 1.2em;
+    border: 3px solid darkslateblue;
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+}
+
+#icon-browse{
+    margin: 0 3vw 0 3vw;
+    font-size: 1.5em;
+    color: darkslateblue;
+}
+
+#clean-pokemons{
+    border: 3px solid #ffc107;
+    color: #ffc107;
+}
+
+#clean-pokemons:hover{
+    background: #ffc107;
+    border: 3px solid #ffc107;
+    color: white;
+    cursor: pointer;
+}
+
 i{
     padding-top: 2px;
 }

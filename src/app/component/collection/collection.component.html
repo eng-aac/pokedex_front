@@ -1,7 +1,17 @@
 <h3>Collection</h3>
 
+<div class="form-browse">
+    <input type="text" id="pokemon-name" [(ngModel)]="pokemon_name" (keyUp.enter)="browsePokemon()" class="input-pokemon-name" placeholder="Search your Pokemon, by name...">
+    
+    <i class="fas fa-search" id="icon-browse"></i>
+    
+    <button type="reset" *ngIf="pokemon_name" (click)="cleanPokemon()" class="modal-form-buttons-reset" id="clean-pokemons">
+        <i class="fas fa-spinner"></i>
+    </button> 
+</div>
+
 <div class="container-card" id="container-card">
-    <div class="card" id="" *ngFor="let pokemon of pokemons" [ngStyle]="{'background': background_colors[pokemon.type]}">
+    <div class="card" *ngFor="let pokemon of pokemons" [ngStyle]="{'background': background_colors[pokemon.type]}">
         <div class="card-body">
             <div class="img-container">
                 <img [src]="pokemon.sampleImage" alt="image-profile-pokemon" class="img-pokemon">

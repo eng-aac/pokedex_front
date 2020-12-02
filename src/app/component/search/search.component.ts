@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   error: boolean = false;
   message: string = '';
   isPokemon: boolean = true;
-  messagePokemon: string = 'Click to add your Collection.'
+  messagePokemon: string = 'Click to add your Collection.';
 
   background_colors = {
     fire: '#FDDFDF',
@@ -73,9 +73,13 @@ export class SearchComponent implements OnInit {
       }, (err) =>   {  this.browsing = false;
   
                         setTimeout(() => {
-                          this.message = 'This process, was invalid !! ' + err;
+                          this.message = 'This process, was invalid !!';
                         }, 200);
 
+                        setTimeout(() => {
+                          this._serviceMessage.error('Error!', 'Could not find, your pokemon. ' + err);
+                        }, 800);
+                        
                         throw err;
                     }
       );   
