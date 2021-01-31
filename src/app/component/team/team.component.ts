@@ -110,6 +110,7 @@ export class TeamComponent implements OnInit {
 
   viewPokemon(id: number){
     this.isViewPokemon = true;
+    
     this._service.getOne(id).subscribe(data => {
       this.pokemon = data;
     }, (err) => {
@@ -119,6 +120,7 @@ export class TeamComponent implements OnInit {
   }
 
   viewPokemons(teamId: number){
+    this.cancelPokemon();
     this.id_vtp = teamId;
     this.isTeamsPokemons = true;
     this.isCancelView = true;
